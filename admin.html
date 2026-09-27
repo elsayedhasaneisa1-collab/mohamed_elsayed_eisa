@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>لوحة التحكم | منصة الأستاذ محمد عيسى التعليمية</title>
+  <meta name="description" content="لوحة تحكم إدارة منصة الأستاذ محمد عيسى التعليمية — إدارة الكورسات والدروس والامتحانات والواجبات والإعلانات والطلاب." />
+  <meta name="theme-color" content="#0a0a0a" />
+  <meta name="robots" content="noindex,nofollow" />
+
+  <link rel="icon" type="image/png" href="assets/icon-192.png" />
+  <link rel="manifest" href="manifest.json" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="page-admin">
+
+  <div class="bg-stage" aria-hidden="true">
+    <div class="bg-glow bg-glow--one"></div>
+    <div class="bg-glow bg-glow--two"></div>
+    <div class="bg-grid"></div>
+    <div class="bg-noise"></div>
+    <div class="bg-vignette"></div>
+  </div>
+
+  <!-- ══════════════ الشريط العلوي ══════════════ -->
+  <header class="admin-top">
+    <a href="index.html" class="brand">
+      <span class="brand__mark" aria-hidden="true">
+        <svg viewBox="0 0 48 48" width="32" height="32">
+          <path d="M24 2.5 44 13v22L24 45.5 4 35V13z" fill="none" stroke="#e6b800" stroke-width="2.2" />
+          <path d="M15 31V17l9 8 9-8v14" fill="none" stroke="#e6b800" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </span>
+      <span class="brand__text"><strong>محمد عيسى</strong><small>لوحة التحكم</small></span>
+    </a>
+
+    <div class="admin-top__title">
+      <h1>إدارة المنصة</h1>
+      <small><span id="adminUserName">—</span> · <span id="adminRole" class="gold">إدارة</span></small>
+    </div>
+
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      <button type="button" class="btn btn--line btn--sm" onclick="openChatModal()">
+        <i class="fa-regular fa-comments"></i> شات الطلاب
+        <span class="chat-dot" id="bbChat" hidden style="position:static;box-shadow:none"></span>
+      </button>
+      <a href="index.html" class="btn btn--ghost btn--sm"><i class="fa-solid fa-house"></i> الموقع</a>
+      <button type="button" class="btn btn--ghost btn--sm" onclick="loadAdminData()"><i class="fa-solid fa-rotate"></i> تحديث</button>
+      <button type="button" class="btn btn--danger btn--sm" onclick="confirmLogout()"><i class="fa-solid fa-arrow-right-from-bracket"></i> خروج</button>
+    </div>
+  </header>
+
+  <!-- ══════════════ شاشة الحماية (لغير الأدمن) ══════════════ -->
+  <div class="guard-screen" id="adminGuard" hidden>
+    <div class="guard-screen__box">
+      <i class="fa-solid fa-user-shield big"></i>
+      <h2>الدخول مقيّد</h2>
+      <p>هذه الصفحة مخصّصة لإدارة منصة <b class="gold">الأستاذ محمد عيسى</b> فقط.
+        لو كنت طالبًا وتحتاج مساعدة، تواصل مع الدعم الفني.</p>
+      <div style="display:flex;gap:9px;justify-content:center;flex-wrap:wrap">
+        <a href="index.html" class="btn btn--gold"><i class="fa-solid fa-house"></i> الصفحة الرئيسية</a>
+        <a href="https://t.me/sayoda_elgadar" target="_blank" rel="noopener noreferrer" class="btn btn--line"><i class="fa-brands fa-telegram"></i> الدعم الفني</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ محتوى لوحة التحكم ══════════════ -->
+  <div class="admin-shell" id="adminShell" hidden>
+
+    <!-- الإحصائيات -->
+    <div class="admin-stats" id="adminStats"></div>
+    <p class="muted" id="adminSubStat" style="font-size:.8rem;margin:-8px 0 20px">—</p>
+
+    <!-- التبويبات الستة -->
+    <div class="admin-tabs" role="tablist" aria-label="أقسام لوحة التحكم">
+      <button type="button" role="tab" class="admin-tabs__btn is-active" data-tab="courses" onclick="switchAdminTab('courses', this)">
+        <i class="fa-solid fa-layer-group"></i> كورسات <span class="cnt">0</span>
+      </button>
+      <button type="button" role="tab" class="admin-tabs__btn" data-tab="lessons" onclick="switchAdminTab('lessons', this)">
+        <i class="fa-solid fa-film"></i> دروس <span class="cnt">0</span>
+      </button>
+      <button type="button" role="tab" class="admin-tabs__btn" data-tab="exams" onclick="switchAdminTab('exams', this)">
+        <i class="fa-solid fa-file-signature"></i> امتحانات <span class="cnt">0</span>
+      </button>
+      <button type="button" role="tab" class="admin-tabs__btn" data-tab="homeworks" onclick="switchAdminTab('homeworks', this)">
+        <i class="fa-solid fa-pen-to-square"></i> واجبات <span class="cnt">0</span>
+      </button>
+      <button type="button" role="tab" class="admin-tabs__btn" data-tab="announcements" onclick="switchAdminTab('announcements', this)">
+        <i class="fa-solid fa-bullhorn"></i> إعلانات <span class="cnt">0</span>
+      </button>
+      <button type="button" role="tab" class="admin-tabs__btn" data-tab="students" onclick="switchAdminTab('students', this)">
+        <i class="fa-solid fa-user-graduate"></i> طلاب <span class="cnt">0</span>
+        <span class="thread__unread" id="pendingCount" hidden style="margin-inline-start:4px">0</span>
+      </button>
+    </div>
+
+    <!-- ══ 1) كورسات ══ -->
+    <section class="admin-panel is-active" id="panel-courses">
+      <div class="panel-head">
+        <div>
+          <h2>إدارة الكورسات</h2>
+          <p>أنشئ الكورسات وحدّد الصف والسعر والغلاف. كل كورس يحتوي على دروسه الخاصة.</p>
+        </div>
+        <div class="panel-tools">
+          <div class="search-box"><i class="fa-solid fa-magnifying-glass"></i>
+            <input type="search" id="adminSearch" placeholder="بحث…" oninput="onAdminSearch(this.value)" />
+          </div>
+          <button type="button" class="btn btn--gold btn--sm" onclick="openAdminModal('courses')"><i class="fa-solid fa-plus"></i> كورس جديد</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <div class="table-scroll"></div>
+        <div class="cards-mobile"></div>
+      </div>
+    </section>
+
+    <!-- ══ 2) دروس ══ -->
+    <section class="admin-panel" id="panel-lessons">
+      <div class="panel-head">
+        <div>
+          <h2>إدارة الدروس</h2>
+          <p>ارفع روابط الفيديو (YouTube / Vimeo / Google Drive / MP4) وحدّد الترتيب والمدة.</p>
+        </div>
+        <div class="panel-tools">
+          <button type="button" class="btn btn--ghost btn--sm" onclick="moveLessonOrder(-1)"><i class="fa-solid fa-arrow-up"></i> تقديم</button>
+          <button type="button" class="btn btn--ghost btn--sm" onclick="moveLessonOrder(1)"><i class="fa-solid fa-arrow-down"></i> تأخير</button>
+          <button type="button" class="btn btn--gold btn--sm" onclick="openAdminModal('lessons')"><i class="fa-solid fa-plus"></i> درس جديد</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <div class="table-scroll"></div>
+        <div class="cards-mobile"></div>
+      </div>
+    </section>
+
+    <!-- ══ 3) امتحانات ══ -->
+    <section class="admin-panel" id="panel-exams">
+      <div class="panel-head">
+        <div>
+          <h2>إدارة الامتحانات</h2>
+          <p>أنشئ امتحانًا بأسئلة اختيارية وحدّد مدّته وموعد انتهائه (expires_at). تُصحَّح النتيجة تلقائيًا.</p>
+        </div>
+        <div class="panel-tools">
+          <button type="button" class="btn btn--ghost btn--sm" onclick="cleanupExpiredExams(false)"><i class="fa-solid fa-broom"></i> تنظيف المنتهية</button>
+          <button type="button" class="btn btn--gold btn--sm" onclick="openAdminModal('exams')"><i class="fa-solid fa-plus"></i> امتحان جديد</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <div class="table-scroll"></div>
+        <div class="cards-mobile"></div>
+      </div>
+    </section>
+
+    <!-- ══ 4) واجبات ══ -->
+    <section class="admin-panel" id="panel-homeworks">
+      <div class="panel-head">
+        <div>
+          <h2>إدارة الواجبات</h2>
+          <p>حدّد الواجب، الكورس، وآخر موعد للتسليم.</p>
+        </div>
+        <div class="panel-tools">
+          <button type="button" class="btn btn--gold btn--sm" onclick="openAdminModal('homeworks')"><i class="fa-solid fa-plus"></i> واجب جديد</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <div class="table-scroll"></div>
+        <div class="cards-mobile"></div>
+      </div>
+    </section>
+
+    <!-- ══ 5) إعلانات ══ -->
+    <section class="admin-panel" id="panel-announcements">
+      <div class="panel-head">
+        <div>
+          <h2>إدارة الإعلانات</h2>
+          <p>انشر مواعيد المحاضرات والأخبار — تظهر فورًا في الصفحة الرئيسية لكل الطلاب.</p>
+        </div>
+        <div class="panel-tools">
+          <button type="button" class="btn btn--gold btn--sm" onclick="openAdminModal('announcements')"><i class="fa-solid fa-plus"></i> إعلان جديد</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <div class="table-scroll"></div>
+        <div class="cards-mobile"></div>
+      </div>
+    </section>
+
+    <!-- ══ 6) طلاب ══ -->
+    <section class="admin-panel" id="panel-students">
+      <div class="panel-head">
+        <div>
+          <h2>الطلاب والاشتراكات</h2>
+          <p>اقبل أو ارفض طلبات الاشتراك، وتابع بيانات الطلاب وحالتهم.</p>
+        </div>
+        <div class="panel-tools">
+          <div class="search-box"><i class="fa-solid fa-magnifying-glass"></i>
+            <input type="search" placeholder="بحث باسم الطالب أو هاتفه…" oninput="onAdminSearch(this.value)" />
+          </div>
+          <button type="button" class="btn btn--line btn--sm" onclick="approveAllPending()"><i class="fa-solid fa-check-double"></i> قبول كل المعلّق</button>
+          <button type="button" class="btn btn--ghost btn--sm" onclick="exportStudents()"><i class="fa-solid fa-file-csv"></i> تصدير CSV</button>
+        </div>
+      </div>
+
+      <h3 class="tasks-col__title" style="margin-top:6px"><i class="fa-solid fa-hourglass-half"></i> طلبات الاشتراك</h3>
+      <div class="task-list" id="enrollmentsList" style="margin-bottom:28px"></div>
+
+      <h3 class="tasks-col__title"><i class="fa-solid fa-users"></i> الطلاب المسجّلون</h3>
+      <div class="table-wrap">
+        <div class="table-scroll" id="studentsTableWrap"></div>
+        <div class="cards-mobile" id="studentsCards"></div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ══════════════ Modal موحّد للإضافة/التعديل ══════════════ -->
+  <div class="modal" id="adminModal" role="dialog" aria-modal="true" aria-labelledby="adminModalTitle" hidden>
+    <div class="modal__backdrop" data-close-modal="adminModal"></div>
+    <div class="modal__box modal__box--form">
+      <header class="modal__head">
+        <div>
+          <span class="modal__kicker" id="adminModalKicker">—</span>
+          <h3 id="adminModalTitle">إضافة</h3>
+        </div>
+        <button type="button" class="modal__x" data-close-modal="adminModal" aria-label="إغلاق"><i class="fa-solid fa-xmark"></i></button>
+      </header>
+      <div class="modal__body" id="adminModalBody"></div>
+    </div>
+  </div>
+
+  <!-- ══════════════ Modal مشغل الفيديو (معاينة الدروس) ══════════════ -->
+  <div class="modal" id="playerModal" role="dialog" aria-modal="true" aria-labelledby="playerModalTitle" hidden>
+    <div class="modal__backdrop" data-close-modal="playerModal"></div>
+    <div class="modal__box modal__box--player">
+      <header class="modal__head">
+        <div>
+          <span class="modal__kicker" id="playerCourseName">معاينة</span>
+          <h3 id="playerModalTitle">عنوان الدرس</h3>
+        </div>
+        <button type="button" class="modal__x" data-close-modal="playerModal" aria-label="إغلاق"><i class="fa-solid fa-xmark"></i></button>
+      </header>
+      <div class="player-stage" id="playerStage">
+        <div class="player-frame" id="playerFrame"></div>
+        <div class="wm-layer" id="wmLayer" aria-hidden="true"><span class="wm-layer__text" id="wmText">—</span></div>
+        <div class="player-guard" id="playerGuard" hidden>
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <h4>تم إيقاف العرض</h4>
+          <p>تم اكتشاف أدوات مطور أو محاولة تسجيل للشاشة.</p>
+          <button type="button" class="btn btn--gold btn--sm" onclick="resumePlayer()"><i class="fa-solid fa-rotate-right"></i> استئناف</button>
+        </div>
+      </div>
+      <footer class="modal__foot modal__foot--split">
+        <div class="player-nav">
+          <button type="button" class="btn btn--line btn--sm" id="btnPrevLesson" onclick="prevLesson()"><i class="fa-solid fa-backward"></i> السابق</button>
+          <span class="player-nav__idx" id="playerLessonIndex">— / —</span>
+          <button type="button" class="btn btn--line btn--sm" id="btnNextLesson" onclick="nextLesson()">التالي <i class="fa-solid fa-forward"></i></button>
+        </div>
+        <div class="player-tools">
+          <button type="button" class="btn btn--ghost btn--sm" id="btnMarkDone" onclick="toggleLessonDone()"><i class="fa-regular fa-circle-check"></i> <span>تمّت المشاهدة</span></button>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <!-- ══════════════ Modal الشات ══════════════ -->
+  <div class="modal" id="chatModal" role="dialog" aria-modal="true" aria-labelledby="chatModalTitle" hidden>
+    <div class="modal__backdrop" data-close-modal="chatModal"></div>
+    <div class="modal__box modal__box--chat">
+      <header class="modal__head modal__head--chat">
+        <div class="chat-head__user">
+          <span class="chat-head__avatar"><i class="fa-solid fa-headset"></i></span>
+          <div>
+            <h3 id="chatModalTitle">شات الطلاب</h3>
+            <small id="chatStatusText"><i class="pulse-dot pulse-dot--gold"></i> متصل</small>
+          </div>
+        </div>
+        <div class="chat-head__tools">
+          <button type="button" class="btn btn--line btn--sm" id="btnChatThreads" onclick="toggleChatThreads()">
+            <i class="fa-solid fa-list-ul"></i> المحادثات
+          </button>
+          <button type="button" class="modal__x" data-close-modal="chatModal" aria-label="إغلاق"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+      </header>
+
+      <aside class="chat-threads" id="chatThreads" hidden>
+        <div class="chat-threads__search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="search" id="chatThreadsSearch" placeholder="ابحث باسم الطالب أو هاتفه…" oninput="filterChatThreads(this.value)" />
+        </div>
+        <div class="chat-threads__list" id="chatThreadsList"></div>
+      </aside>
+
+      <div class="chat-body">
+        <div class="chat-stream" id="chatStream" aria-live="polite"></div>
+        <div class="chat-empty" id="chatEmpty">
+          <i class="fa-regular fa-comment-dots"></i>
+          <h4>اختر محادثة</h4>
+          <p>اختر طالبًا من قائمة المحادثات للرد عليه.</p>
+        </div>
+      </div>
+
+      <form class="chat-composer" id="chatForm" onsubmit="sendChatMessage(event)">
+        <button type="button" class="chat-composer__emoji" onclick="insertQuickText('وعليكم السلام، ')" title="رد سريع"><i class="fa-regular fa-hand"></i></button>
+        <input type="text" id="chatInput" maxlength="800" autocomplete="off" placeholder="اكتب ردّك هنا…" aria-label="نص الرسالة" />
+        <button type="submit" class="chat-composer__send" id="chatSendBtn" aria-label="إرسال"><i class="fa-solid fa-paper-plane"></i></button>
+      </form>
+      <p class="chat-hint" id="chatHint">يمكنك إرسال ٥ رسائل كل ١٠ ثوانٍ.</p>
+    </div>
+  </div>
+
+  <!-- ══════════════ Modal: تم تسجيل خروجك ══════════════ -->
+  <div class="modal modal--alert" id="kickedModal" role="alertdialog" aria-modal="true" aria-labelledby="kickedTitle" hidden>
+    <div class="modal__backdrop modal__backdrop--solid"></div>
+    <div class="modal__box modal__box--sm">
+      <div class="alert-icon"><i class="fa-solid fa-user-shield"></i></div>
+      <h3 id="kickedTitle">تم تسجيل خروجك</h3>
+      <p id="kickedBody">تم فتح حسابك من جهاز آخر، ولذلك أُنهيت هذه الجلسة لحماية حسابك.</p>
+      <div class="modal__foot modal__foot--center">
+        <a href="login.html" class="btn btn--gold"><i class="fa-solid fa-right-to-bracket"></i> تسجيل الدخول مرة أخرى</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ Modal معلومات عام ══════════════ -->
+  <div class="modal" id="infoModal" role="dialog" aria-modal="true" aria-labelledby="infoModalTitle" hidden>
+    <div class="modal__backdrop" data-close-modal="infoModal"></div>
+    <div class="modal__box modal__box--tall">
+      <header class="modal__head">
+        <h3 id="infoModalTitle">تنبيه</h3>
+        <button type="button" class="modal__x" data-close-modal="infoModal" aria-label="إغلاق"><i class="fa-solid fa-xmark"></i></button>
+      </header>
+      <div class="modal__body" id="infoModalBody"></div>
+      <div class="modal__foot modal__foot--center">
+        <button type="button" class="btn btn--line btn--sm" data-close-modal="infoModal">إغلاق</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast-stack" id="toastStack" aria-live="polite"></div>
+
+  <!-- ══════════════ المكتبات ══════════════ -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/session.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/courses.js"></script>
+  <script src="js/player.js"></script>
+  <script src="js/chat.js"></script>
+  <script src="js/admin.js"></script>
+
+  <script>
+    /* ─── إغلاق النوافذ ─── */
+    document.addEventListener('click', function (e) {
+      const c = e.target.closest('[data-close-modal]');
+      if (!c) return;
+      const id = c.getAttribute('data-close-modal');
+      if (id === 'playerModal' && typeof closePlayer === 'function') closePlayer();
+      else closeModal(id);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape') return;
+      const open = document.querySelectorAll('.modal:not([hidden])');
+      if (!open.length) return;
+      const top = open[open.length - 1];
+      if (top.id === 'kickedModal') return;
+      if (top.id === 'playerModal') closePlayer();
+      else closeModal(top.id);
+    });
+
+    /* ─── تأكيد الخروج ─── */
+    function confirmLogout() {
+      if (window.confirm('تسجيل الخروج من لوحة التحكم؟')) logout();
+    }
+
+    /* ─── قبول كل الطلبات المعلّقة ─── */
+    async function approveAllPending() {
+      const pending = ADMIN_DATA.enrollments.filter(function (e) { return e.status === 'pending'; });
+      if (!pending.length) { showToast('لا توجد طلبات معلّقة', 'info'); return; }
+      if (!window.confirm('قبول ' + pending.length + ' طلب اشتراك معلّق دفعة واحدة؟')) return;
+      let done = 0;
+      for (const p of pending) {
+        try {
+          const { error } = await supabaseClient.from('enrollments')
+            .update({ status: 'approved', reviewed_at: new Date().toISOString(), reviewed_by: APP.user.id })
+            .eq('id', p.id);
+          if (!error) { p.status = 'approved'; done++; }
+        } catch (e) {}
+      }
+      showToast('تم قبول ' + done + ' طلب اشتراك ✅', 'success');
+      renderAdminStats(); updateTabCounts(); renderStudentsTab();
+    }
+
+    /* ─── تصدير الطلاب CSV ─── */
+    function exportStudents() {
+      if (!ADMIN_DATA.students.length) { showToast('لا يوجد طلاب للتصدير', 'warn'); return; }
+      const head = ['الاسم', 'النوع', 'البريد', 'الهاتف', 'هاتف ولي الأمر', 'الصف', 'الحالة', 'تاريخ التسجيل'];
+      const rows = ADMIN_DATA.students.map(function (s) {
+        return [s.full_name, s.gender === 'female' ? 'طالبة' : 'طالب', s.email, s.phone,
+                s.parent_phone || '', s.grade, s.status || 'active', formatDate(s.created_at)];
+      });
+      const csv = '\uFEFF' + [head].concat(rows).map(function (r) {
+        return r.map(function (c) { return '"' + String(c == null ? '' : c).replace(/"/g, '""') + '"'; }).join(',');
+      }).join('\n');
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'students-' + new Date().toISOString().slice(0, 10) + '.csv';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      showToast('تم تصدير ملف الطلاب بنجاح', 'success');
+    }
+
+    /* ─── تقديم/تأخير ترتيب الدروس ─── */
+    async function moveLessonOrder(direction) {
+      const id = window.prompt('أدخل رقم الدرس المراد تحريكه (من عمود #):\n' +
+        ADMIN_DATA.lessons.slice(0, 30).map(function (l, i) {
+          return (l.order_index != null ? l.order_index : i + 1) + ' — ' + l.title;
+        }).join('\n'));
+      if (!id) return;
+      const idx = ADMIN_DATA.lessons.findIndex(function (l) {
+        return String(l.order_index) === String(id).trim();
+      });
+      if (idx === -1) { showToast('لم يتم العثور على الدرس', 'error'); return; }
+      const target = idx + direction;
+      if (target < 0 || target >= ADMIN_DATA.lessons.length) { showToast('لا يمكن التحريك أكثر من ذلك', 'warn'); return; }
+
+      const a = ADMIN_DATA.lessons[idx], b = ADMIN_DATA.lessons[target];
+      const tmp = a.order_index;
+      a.order_index = b.order_index != null ? b.order_index : target + 1;
+      b.order_index = tmp != null ? tmp : idx + 1;
+
+      try {
+        await supabaseClient.from('lessons').update({ order_index: a.order_index }).eq('id', a.id);
+        await supabaseClient.from('lessons').update({ order_index: b.order_index }).eq('id', b.id);
+        ADMIN_DATA.lessons.sort(function (x, y) { return (x.order_index || 0) - (y.order_index || 0); });
+        showToast('تم تحديث الترتيب ✅', 'success');
+        renderEntityTable('lessons');
+      } catch (e) { showToast('تعذّر تحديث الترتيب', 'error'); }
+    }
+
+    /* ─── تشغيل الصفحة ─── */
+    document.addEventListener('DOMContentLoaded', function () {
+      if (typeof initProtection === 'function') initProtection();
+      initAdmin();
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register(basePath() + 'sw.js', { scope: basePath() }).catch(function () {});
+      }
+    });
+  </script>
+</body>
+</html>

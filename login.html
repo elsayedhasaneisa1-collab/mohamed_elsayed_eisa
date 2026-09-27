@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>تسجيل الدخول | منصة الأستاذ محمد عيسى التعليمية</title>
+  <meta name="description" content="سجّل الدخول إلى منصة الأستاذ محمد عيسى التعليمية لمتابعة كورساتك ودروسك." />
+  <meta name="theme-color" content="#0a0a0a" />
+  <meta name="robots" content="noindex,nofollow" />
+
+  <link rel="icon" type="image/png" href="assets/icon-192.png" />
+  <link rel="manifest" href="manifest.json" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="page-auth">
+
+  <!-- خلفية طبقية -->
+  <div class="bg-stage" aria-hidden="true">
+    <div class="bg-glow bg-glow--one"></div>
+    <div class="bg-glow bg-glow--two"></div>
+    <div class="bg-grid"></div>
+    <div class="bg-noise"></div>
+    <div class="bg-vignette"></div>
+  </div>
+
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <a href="index.html" class="auth-back" title="العودة للرئيسية"><i class="fa-solid fa-arrow-right"></i></a>
+
+      <div class="auth-card__top">
+        <a href="index.html" class="brand">
+          <span class="brand__mark" aria-hidden="true">
+            <svg viewBox="0 0 48 48" width="34" height="34">
+              <path d="M24 2.5 44 13v22L24 45.5 4 35V13z" fill="none" stroke="#e6b800" stroke-width="2.2" />
+              <path d="M15 31V17l9 8 9-8v14" fill="none" stroke="#e6b800" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </span>
+          <span class="brand__text"><strong>محمد عيسى</strong><small>منصة تعليمية</small></span>
+        </a>
+        <h1>تسجيل الدخول</h1>
+        <p>أهلًا بعودتك — أدخل بياناتك لمتابعة كورساتك</p>
+      </div>
+
+      <div class="auth-card__body">
+
+        <!-- تنبيه تجاوز المحاولات (5 محاولات / 15 دقيقة) -->
+        <div class="rate-alert" id="loginRateAlert" hidden></div>
+
+        <form id="loginForm" class="form-grid" onsubmit="handleAuth(event)" novalidate>
+
+          <!-- البريد الإلكتروني -->
+          <div class="field">
+            <label class="field__label" for="loginEmail">
+              <i class="fa-solid fa-envelope"></i> البريد الإلكتروني <span class="req">*</span>
+            </label>
+            <span class="field__wrap">
+              <i class="lead fa-regular fa-envelope"></i>
+              <input class="field__input" type="email" id="loginEmail" name="email"
+                     placeholder="student@example.com" dir="ltr" autocomplete="email"
+                     inputmode="email" required />
+            </span>
+            <span class="field__err"></span>
+          </div>
+
+          <!-- كلمة المرور -->
+          <div class="field">
+            <label class="field__label" for="loginPassword">
+              <i class="fa-solid fa-lock"></i> كلمة المرور <span class="req">*</span>
+            </label>
+            <span class="field__wrap">
+              <i class="lead fa-solid fa-key"></i>
+              <input class="field__input" type="password" id="loginPassword" name="password"
+                     placeholder="••••••••" dir="ltr" autocomplete="current-password" required />
+              <button type="button" class="field__toggle" onclick="togglePass('loginPassword', this)" aria-label="إظهار كلمة المرور">
+                <i class="fa-regular fa-eye"></i>
+              </button>
+            </span>
+            <span class="field__err"></span>
+            <span class="field__hint"><i class="fa-solid fa-shield-halved"></i> مسموح بـ ٥ محاولات كل ١٥ دقيقة</span>
+          </div>
+
+          <!-- تذكّرني + نسيت كلمة المرور -->
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+            <label class="check-row" style="padding:9px 12px;font-size:.82rem">
+              <input type="checkbox" id="loginRemember" checked />
+              <i class="box"><i class="fa-solid fa-check"></i></i>
+              <span>تذكّرني على هذا الجهاز</span>
+            </label>
+            <button type="button" class="link-btn" onclick="resetPassword()">نسيت كلمة المرور؟</button>
+          </div>
+
+          <!-- زر الدخول -->
+          <button type="submit" class="btn btn--gold btn--lg btn--block" id="loginSubmit">
+            <i class="fa-solid fa-right-to-bracket"></i> تسجيل الدخول
+          </button>
+        </form>
+
+        <div class="auth-sep">أو</div>
+
+        <a href="index.html" class="btn btn--line btn--block"><i class="fa-solid fa-house"></i> العودة للصفحة الرئيسية</a>
+
+        <div class="auth-note">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>
+            حسابك مرتبط بجهاز واحد فقط — عند فتحه من جهاز آخر تُنهى هذه الجلسة تلقائيًا.
+            لمشكلة في الدخول تواصل مع الدعم الفني على
+            <a href="https://t.me/sayoda_elgadar" target="_blank" rel="noopener noreferrer" class="gold">تيليجرام</a>
+            أو على الرقم <b dir="ltr">01555814414</b>.
+          </span>
+        </div>
+      </div>
+
+      <div class="auth-card__foot">
+        ليس لديك حساب؟ <a href="register.html">أنشئ حسابًا جديدًا</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast-stack" id="toastStack" aria-live="polite"></div>
+
+  <!-- المكتبات -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/session.js"></script>
+  <script src="js/auth.js"></script>
+
+  <script>
+    /* ─── إظهار/إخفاء كلمة المرور ─── */
+    function togglePass(id, btn) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const show = el.type === 'password';
+      el.type = show ? 'text' : 'password';
+      btn.innerHTML = '<i class="fa-regular fa-eye' + (show ? '-slash' : '') + '"></i>';
+      btn.setAttribute('aria-label', show ? 'إخفاء كلمة المرور' : 'إظهار كلمة المرور');
+    }
+
+    /* ─── استعادة كلمة المرور ─── */
+    async function resetPassword() {
+      const email = (document.getElementById('loginEmail').value || '').trim();
+      if (!isValidEmail(email)) {
+        showToast('اكتب بريدك الإلكتروني أولًا ثم اضغط «نسيت كلمة المرور»', 'warn', 4500);
+        document.getElementById('loginEmail').focus();
+        return;
+      }
+      try {
+        const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
+          redirectTo: window.location.origin + basePath() + 'login.html'
+        });
+        if (error) throw error;
+        showToast('تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك ✉️', 'success', 6000);
+      } catch (err) {
+        showToast(translateError(err), 'error', 5000);
+      }
+    }
+
+    /* ─── تشغيل الصفحة ─── */
+    document.addEventListener('DOMContentLoaded', async function () {
+      // الحماية
+      if (typeof initProtection === 'function') initProtection();
+
+      // لو مسجّل دخول بالفعل → تحويل مباشر
+      try {
+        const { data } = await supabaseClient.auth.getSession();
+        const user = data && data.session && data.session.user;
+        if (user) {
+          APP.user = user;
+          showToast('أنت مسجّل الدخول بالفعل — جارِ التحويل…', 'info', 2200);
+          await onLogin(false);
+          setTimeout(function () { goTo(APP.isAdmin ? CONFIG.PAGES.admin : CONFIG.PAGES.home); }, 700);
+        }
+      } catch (e) {}
+
+      // عرض حالة حد المحاولات إن وُجدت
+      const pre = loginRateLimiter.check();
+      if (!pre.allowed) renderRateAlert(document.getElementById('loginRateAlert'), rateLimitMessage(pre));
+
+      // Enter داخل الحقول
+      document.querySelectorAll('#loginForm input').forEach(function (i) {
+        i.addEventListener('keydown', function (e) { if (e.key === 'Enter') handleAuth(e); });
+      });
+
+      const f = document.getElementById('loginEmail');
+      if (f) setTimeout(function () { f.focus(); }, 320);
+
+      // تسجيل Service Worker
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register(basePath() + 'sw.js', { scope: basePath() }).catch(function () {});
+      }
+    });
+  </script>
+</body>
+</html>

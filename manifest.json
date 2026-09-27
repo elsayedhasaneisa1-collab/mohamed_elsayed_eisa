@@ -1,0 +1,53 @@
+{
+  "name": "منصة الأستاذ محمد عيسى التعليمية",
+  "short_name": "الأستاذ محمد عيسى",
+  "description": "منصة تعليمية عربية متكاملة لطلاب المرحلة الثانوية — كورسات، دروس مسجّلة، امتحانات إلكترونية، واجبات، ومتابعة مباشرة مع الأستاذ محمد عيسى.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "id": "/mohamed_elsayed_eisa/",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "orientation": "portrait-primary",
+  "background_color": "#0a0a0a",
+  "theme_color": "#d4af37",
+  "lang": "ar",
+  "dir": "rtl",
+  "categories": ["education", "productivity"],
+  "shortcuts": [
+    {
+      "name": "الكورسات",
+      "short_name": "كورسات",
+      "url": "./index.html#courses",
+      "icons": [{ "src": "assets/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "الشات مع الأستاذ",
+      "short_name": "شات",
+      "url": "./index.html?open=chat",
+      "icons": [{ "src": "assets/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "كورساتي",
+      "short_name": "كورساتي",
+      "url": "./index.html?tab=myCourses"
+    },
+    {
+      "name": "الدعم الفني",
+      "short_name": "دعم",
+      "url": "https://t.me/sayoda_elgadar"
+    }
+  ],
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

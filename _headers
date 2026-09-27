@@ -1,0 +1,67 @@
+# ═══════════════════════════════════════════════════════════════
+# _headers — رؤوس الأمان لمنصة الأستاذ محمد عيسى التعليمية
+# يُستخدم مع Netlify / Cloudflare Pages (نفس الصيغة)
+# ═══════════════════════════════════════════════════════════════
+
+/*
+  # ─── سياسة أمان المحتوى (CSP) ───
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://*.supabase.co; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; img-src 'self' data: blob: https:; media-src 'self' blob: https:; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://player.vimeo.com https://drive.google.com https://*.supabase.co; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://*.googleapis.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:; object-src 'none'; upgrade-insecure-requests
+
+  # ─── رؤوس الحماية ───
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-XSS-Protection: 1; mode=block
+  X-Permitted-Cross-Domain-Policies: none
+  Cross-Origin-Opener-Policy: same-origin-allow-popups
+  Cross-Origin-Resource-Policy: same-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+
+  # ─── منع الأرشفة للصفحات الحساسة ───
+  X-Robots-Tag: noindex, nofollow, noarchive
+
+# ═══════════════ قواعد خاصة بالصفحات ═══════════════
+
+/login.html
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-store, no-cache, must-revalidate
+
+/register.html
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-store, no-cache, must-revalidate
+
+/admin.html
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-store, no-cache, must-revalidate
+  X-Frame-Options: DENY
+
+# ═══════════════ الأصول الثابتة: تخزين مؤقت طويل ═══════════════
+
+/css/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/js/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# ═══════════════ ملفات PWA: لا تُخزَّن مؤقتًا ═══════════════
+
+/sw.js
+  Cache-Control: no-cache, no-store, must-revalidate
+  Service-Worker-Allowed: /
+
+/manifest.json
+  Cache-Control: no-cache, max-age=0, must-revalidate
+  Content-Type: application/manifest+json; charset=utf-8
+
+# ═══════════════ ملفات SQL: منع الوصول العام ═══════════════
+
+/sql/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-store
+
+/_headers
+  Cache-Control: no-store

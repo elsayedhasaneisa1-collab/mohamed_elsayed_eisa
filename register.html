@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>إنشاء حساب | منصة الأستاذ محمد عيسى التعليمية</title>
+  <meta name="description" content="أنشئ حسابك في منصة الأستاذ محمد عيسى التعليمية واشترك في كورسات المرحلة الثانوية." />
+  <meta name="theme-color" content="#0a0a0a" />
+  <meta name="robots" content="noindex,nofollow" />
+
+  <link rel="icon" type="image/png" href="assets/icon-192.png" />
+  <link rel="manifest" href="manifest.json" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="page-auth">
+
+  <div class="bg-stage" aria-hidden="true">
+    <div class="bg-glow bg-glow--one"></div>
+    <div class="bg-glow bg-glow--two"></div>
+    <div class="bg-grid"></div>
+    <div class="bg-noise"></div>
+    <div class="bg-vignette"></div>
+  </div>
+
+  <div class="auth-wrap">
+    <div class="auth-card auth-card--wide">
+      <a href="index.html" class="auth-back" title="العودة للرئيسية"><i class="fa-solid fa-arrow-right"></i></a>
+
+      <div class="auth-card__top">
+        <a href="index.html" class="brand">
+          <span class="brand__mark" aria-hidden="true">
+            <svg viewBox="0 0 48 48" width="34" height="34">
+              <path d="M24 2.5 44 13v22L24 45.5 4 35V13z" fill="none" stroke="#e6b800" stroke-width="2.2" />
+              <path d="M15 31V17l9 8 9-8v14" fill="none" stroke="#e6b800" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </span>
+          <span class="brand__text"><strong>محمد عيسى</strong><small>منصة تعليمية</small></span>
+        </a>
+        <h1>إنشاء حساب جديد</h1>
+        <p>انضم للمنصة وتابع دروسك وامتحاناتك في مكان واحد</p>
+      </div>
+
+      <div class="auth-card__body">
+
+        <!-- خطوات -->
+        <div class="steps" id="regSteps">
+          <div class="steps__i is-active" data-step="1"><b>1</b><span>البيانات</span></div>
+          <i class="steps__line"></i>
+          <div class="steps__i" data-step="2"><b>2</b><span>الأمان</span></div>
+          <i class="steps__line"></i>
+          <div class="steps__i" data-step="3"><b>3</b><span>التأكيد</span></div>
+        </div>
+
+        <!-- تنبيه حد المحاولات -->
+        <div class="rate-alert" id="registerRateAlert" hidden></div>
+
+        <!-- ═══ نموذج التسجيل ═══ -->
+        <div id="registerPanel">
+          <form id="registerForm" class="form-grid form-grid--2" onsubmit="handleRegister(event)" novalidate>
+
+            <!-- الاسم -->
+            <div class="field field--full">
+              <label class="field__label" for="regName">
+                <i class="fa-solid fa-user"></i> الاسم بالكامل <span class="req">*</span>
+              </label>
+              <span class="field__wrap">
+                <i class="lead fa-regular fa-user"></i>
+                <input class="field__input" type="text" id="regName" name="full_name"
+                       placeholder="مثال: أحمد محمد السيد" autocomplete="name" maxlength="80" required />
+              </span>
+              <span class="field__hint"><i class="fa-solid fa-circle-info"></i> سيظهر هذا الاسم على العلامة المائية للفيديو</span>
+              <span class="field__err"></span>
+            </div>
+
+            <!-- النوع (radio) -->
+            <div class="field field--full">
+              <span class="field__label"><i class="fa-solid fa-venus-mars"></i> النوع <span class="req">*</span></span>
+              <div class="radio-cards">
+                <label class="radio-card">
+                  <input type="radio" name="regGender" value="male" checked />
+                  <span><i class="fa-solid fa-mars"></i> طالب</span>
+                </label>
+                <label class="radio-card">
+                  <input type="radio" name="regGender" value="female" />
+                  <span><i class="fa-solid fa-venus"></i> طالبة</span>
+                </label>
+              </div>
+              <span class="field__err"></span>
+            </div>
+
+            <!-- البريد الإلكتروني -->
+            <div class="field">
+              <label class="field__label" for="regEmail">
+                <i class="fa-solid fa-envelope"></i> البريد الإلكتروني <span class="req">*</span>
+              </label>
+              <span class="field__wrap">
+                <i class="lead fa-regular fa-envelope"></i>
+                <input class="field__input" type="email" id="regEmail" name="email"
+                       placeholder="student@example.com" dir="ltr" autocomplete="email"
+                       inputmode="email" required />
+              </span>
+              <span class="field__err"></span>
+            </div>
+
+            <!-- الصف الدراسي -->
+            <div class="field">
+              <label class="field__label" for="regGrade">
+                <i class="fa-solid fa-graduation-cap"></i> الصف الدراسي <span class="req">*</span>
+              </label>
+              <span class="field__wrap">
+                <i class="lead fa-solid fa-graduation-cap"></i>
+                <select class="field__input" id="regGrade" name="grade" required>
+                  <option value="">— اختر الصف —</option>
+                  <!-- تُملأ من CONFIG.GRADES -->
+                </select>
+              </span>
+              <span class="field__err"></span>
+            </div>
+
+            <!-- هاتف الطالب -->
+            <div class="field">
+              <label class="field__label" for="regPhone">
+                <i class="fa-solid fa-mobile-screen"></i> رقم الهاتف <span class="req">*</span>
+              </label>
+              <span class="field__wrap">
+                <i class="lead fa-solid fa-phone"></i>
+                <input class="field__input" type="tel" id="regPhone" name="phone" dir="ltr"
+                       placeholder="01XXXXXXXXX" inputmode="numeric" maxlength="11"
+                       autocomplete="tel" pattern="01[0125][0-9]{8}" required />
+              </span>
+              <span class="field__hint"><i class="fa-solid fa-circle-info"></i> ١١ رقمًا ويبدأ بـ 01</span>
+              <span class="field__err"></span>
+            </div>
+
+            <!-- هاتف ولي الأمر -->
+            <div class="field">
+              <label class="field__label" for="regParentPhone">
+                <i class="fa-solid fa-phone-flip"></i> رقم هاتف ولي الأمر
+              </label>
+              <span class="field__wrap">
+                <i class="lead fa-solid fa-user-shield"></i>
+                <input class="field__input" type="tel" id="regParentPhone" name="parent_phone" dir="ltr"
+                       placeholder="01XXXXXXXXX" inputmode="numeric" maxlength="11"
+                       pattern="01[0125][0-9]{8}" />
+              </span>
+              <span class="field__hint"><i class="fa-solid fa-circle-info"></i> اختياري — للتواصل في حالات المتابعة</span>
+              <span class="field__err"></span>
+            </div>
+
+            <!-- كلمة المرور + مؤشر القوة -->
+            <div class="field">
+              <label class="field__label" for="regPassword">
+                <i class="fa-solid fa-lock"></i> كلمة المرور <span class="req">*</span>
+              </label>
+              <span class="field__wrap">
+                <i class="lead fa-solid fa-key"></i>
+                <input class="field__input" type="password" id="regPassword" name="password" dir="ltr"
+                       placeholder="٦ أحرف على الأقل" autocomplete="new-password" minlength="6" required />
+                <button type="button" class="field__toggle" onclick="togglePass('regPassword', this)" aria-label="إظهار كلمة المرور">
+                  <i class="fa-regular fa-eye"></i>
+                </button>
+              </span>
+
+              <!-- مؤشر قوة كلمة المرور -->
+              <div class="strength" id="passStrength" data-level="0">
+                <div class="strength__bars"><i></i><i></i><i></i><i></i></div>
+                <div class="strength__label">
+                  <span id="passTip">أدخل كلمة مرور</span>
+                  <b id="passLabel">—</b>
+                </div>
+              </div>
+              <span class="field__err"></span>
+            </div>
+
+            <!-- تأكيد كلمة المرور -->
+            <div class="field">
+              <label class="field__label" for="regPassword2">
+                <i class="fa-solid fa-lock"></i> تأكيد كلمة المرور <span class="req">*</span>
+              </label>
+              <span class="field__wrap">
+                <i class="lead fa-solid fa-key"></i>
+                <input class="field__input" type="password" id="regPassword2" name="password_confirm" dir="ltr"
+                       placeholder="أعد كتابة كلمة المرور" autocomplete="new-password" minlength="6" required />
+                <button type="button" class="field__toggle" onclick="togglePass('regPassword2', this)" aria-label="إظهار كلمة المرور">
+                  <i class="fa-regular fa-eye"></i>
+                </button>
+              </span>
+              <span class="field__err"></span>
+            </div>
+
+            <!-- الشروط والأحكام -->
+            <div class="field field--full">
+              <label class="check-row" for="regTerms">
+                <input type="checkbox" id="regTerms" name="terms" required />
+                <i class="box"><i class="fa-solid fa-check"></i></i>
+                <span>
+                  أوافق على <a href="#" onclick="showTerms(event)">الشروط والأحكام</a> وسياسة الخصوصية،
+                  وأتعهد بعدم مشاركة حسابي مع أي شخص آخر، وعلمي بأن الحساب يعمل على
+                  <b class="gold">جهاز واحد فقط</b> في نفس الوقت، وأن المحتوى محمي بعلامة مائية تحمل اسمي.
+                </span>
+              </label>
+              <span class="field__err"></span>
+            </div>
+
+            <!-- زر التسجيل -->
+            <div class="field--full" style="grid-column:1/-1">
+              <button type="submit" class="btn btn--gold btn--lg btn--block" id="registerSubmit">
+                <i class="fa-solid fa-user-plus"></i> إنشاء الحساب
+              </button>
+            </div>
+          </form>
+
+          <div class="auth-sep">أو</div>
+
+          <div style="display:flex;gap:9px;flex-wrap:wrap">
+            <a href="login.html" class="btn btn--line" style="flex:1"><i class="fa-solid fa-right-to-bracket"></i> لديّ حساب بالفعل</a>
+            <a href="index.html" class="btn btn--ghost" style="flex:1"><i class="fa-solid fa-house"></i> الرئيسية</a>
+          </div>
+
+          <div class="auth-note">
+            <i class="fa-solid fa-headset"></i>
+            <span>
+              محتاج مساعدة في التسجيل؟ كلّم الدعم الفني على
+              <a href="https://t.me/sayoda_elgadar" target="_blank" rel="noopener noreferrer" class="gold">تيليجرام</a>
+              أو على <b dir="ltr">01555814414</b>.
+            </span>
+          </div>
+        </div>
+
+        <!-- ═══ لوحة النجاح ═══ -->
+        <div id="registerSuccess" hidden>
+          <div class="success-panel">
+            <div class="success-panel__ic"><i class="fa-solid fa-circle-check"></i></div>
+            <h2 id="successTitle">تم إنشاء الحساب بنجاح</h2>
+            <p id="successBody"></p>
+
+            <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px">
+              <a href="login.html" class="btn btn--gold btn--lg"><i class="fa-solid fa-right-to-bracket"></i> تسجيل الدخول الآن</a>
+              <a href="index.html" class="btn btn--line btn--lg"><i class="fa-solid fa-house"></i> العودة للرئيسية</a>
+            </div>
+
+            <div class="auth-note" style="text-align:start;margin-top:22px">
+              <i class="fa-solid fa-bolt"></i>
+              <span>
+                بعد تسجيل الدخول: تصفّح الكورسات، اضغط «اشترك الآن»، وانتظر موافقة الأستاذ
+                ليُفعّل اشتراكك وتُفتح لك كل الدروس.
+              </span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="auth-card__foot">
+        لديك حساب بالفعل؟ <a href="login.html">سجّل الدخول</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast-stack" id="toastStack" aria-live="polite"></div>
+
+  <!-- Modal: الشروط والأحكام -->
+  <div class="modal" id="termsModal" role="dialog" aria-modal="true" aria-labelledby="termsTitle" hidden>
+    <div class="modal__backdrop" data-close-modal="termsModal"></div>
+    <div class="modal__box modal__box--tall">
+      <header class="modal__head">
+        <div>
+          <span class="modal__kicker">منصة محمد عيسى التعليمية</span>
+          <h3 id="termsTitle">الشروط والأحكام</h3>
+        </div>
+        <button type="button" class="modal__x" data-close-modal="termsModal" aria-label="إغلاق"><i class="fa-solid fa-xmark"></i></button>
+      </header>
+      <div class="modal__body" style="line-height:1.95;font-size:.9rem;color:var(--text-2)">
+        <h4 style="color:var(--gold-2);margin-bottom:8px">١) الحساب والملكية</h4>
+        <p>الحساب شخصي ولا يجوز مشاركته أو بيعه لأي شخص آخر. أي استخدام مشترك يؤدي لإيقاف الحساب دون استرداد.</p>
+
+        <h4 style="color:var(--gold-2);margin:18px 0 8px">٢) الجلسة الواحدة</h4>
+        <p>يُسمح بتشغيل الحساب على جهاز واحد فقط في نفس الوقت. عند تسجيل الدخول من جهاز آخر تُنهى الجلسة الأولى تلقائيًا.</p>
+
+        <h4 style="color:var(--gold-2);margin:18px 0 8px">٣) حماية المحتوى</h4>
+        <p>جميع الدروس محمية بعلامة مائية تحمل اسم الطالب ومعرّفه. أي تسجيل أو إعادة نشر للمحتوى يعرّض صاحبه للمسائلة القانونية وإيقاف الحساب نهائيًا.</p>
+
+        <h4 style="color:var(--gold-2);margin:18px 0 8px">٤) الاشتراكات</h4>
+        <p>تُفعّل الاشتراكات بعد موافقة إدارة المنصة والتأكد من سداد الرسوم. يحق للإدارة رفض أي طلب دون إبداء أسباب.</p>
+
+        <h4 style="color:var(--gold-2);margin:18px 0 8px">٥) السلوك</h4>
+        <p>يُمنع استخدام الشات في غير الأغراض الدراسية، ويُمنع إرسال رسائل متكررة أو مسيئة. الحد المسموح: ٥ رسائل كل ١٠ ثوانٍ.</p>
+
+        <h4 style="color:var(--gold-2);margin:18px 0 8px">٦) الدعم الفني</h4>
+        <p>لأي مشكلة تقنية تواصل مع الدعم على تيليجرام <b dir="ltr" class="gold">t.me/sayoda_elgadar</b> أو الهاتف <b dir="ltr" class="gold">01555814414</b>.</p>
+      </div>
+      <div class="modal__foot modal__foot--center">
+        <button type="button" class="btn btn--gold" onclick="acceptTerms()"><i class="fa-solid fa-check"></i> فهمت وأوافق</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- المكتبات -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/session.js"></script>
+  <script src="js/auth.js"></script>
+
+  <script>
+    /* ─── إظهار/إخفاء كلمة المرور ─── */
+    function togglePass(id, btn) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const show = el.type === 'password';
+      el.type = show ? 'text' : 'password';
+      btn.innerHTML = '<i class="fa-regular fa-eye' + (show ? '-slash' : '') + '"></i>';
+    }
+
+    /* ─── نافذة الشروط ─── */
+    function showTerms(e) {
+      if (e) e.preventDefault();
+      openModal('termsModal');
+    }
+    function acceptTerms() {
+      const cb = document.getElementById('regTerms');
+      if (cb) {
+        cb.checked = true;
+        const row = cb.closest('.check-row');
+        if (row) row.classList.remove('is-invalid');
+      }
+      closeModal('termsModal');
+      showToast('شكرًا لموافقتك على الشروط ✅', 'success', 2600);
+    }
+
+    /* ─── إغلاق النوافذ ─── */
+    document.addEventListener('click', function (e) {
+      const c = e.target.closest('[data-close-modal]');
+      if (c) closeModal(c.getAttribute('data-close-modal'));
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeModal('termsModal');
+    });
+
+    /* ─── تحديث الخطوات حسب التركيز ─── */
+    function setStep(n) {
+      document.querySelectorAll('#regSteps .steps__i').forEach(function (s) {
+        const i = Number(s.dataset.step);
+        s.classList.toggle('is-active', i === n);
+        s.classList.toggle('is-done', i < n);
+      });
+    }
+
+    /* ─── مؤشر قوة كلمة المرور ─── */
+    function bindStrength() {
+      const p = document.getElementById('regPassword');
+      const c = document.getElementById('regPassword2');
+      const box = document.getElementById('passStrength');
+      const tip = document.getElementById('passTip');
+      const label = document.getElementById('passLabel');
+
+      function update() {
+        const s = passwordStrength(p.value);
+        box.dataset.level = String(s.level);
+        tip.textContent = s.tips;
+        label.textContent = s.label;
+        setStep(p.value ? 2 : 1);
+        if (c.value) setStep(3);
+      }
+      p.addEventListener('input', update);
+      c.addEventListener('input', function () {
+        if (c.value && c.value === p.value) { setFieldState(c, true); setStep(3); }
+        else if (c.value) setFieldState(c, false, 'كلمتا المرور غير متطابقتين');
+      });
+      update();
+    }
+
+    /* ─── التحقق المباشر أثناء الكتابة ─── */
+    function bindLiveValidation() {
+      const rules = [
+        ['regName', function (v) { return v.trim().length >= 3 ? [true] : [false, 'اكتب الاسم كاملًا (٣ أحرف على الأقل)']; }],
+        ['regEmail', function (v) { return isValidEmail(v) ? [true] : [false, 'صيغة البريد الإلكتروني غير صحيحة']; }],
+        ['regPhone', function (v) { return isValidPhone(v) ? [true] : [false, 'رقم الهاتف يجب أن يكون ١١ رقمًا ويبدأ بـ 01']; }],
+        ['regParentPhone', function (v) { return !v || isValidPhone(v) ? [true] : [false, 'رقم ولي الأمر يجب أن يكون ١١ رقمًا ويبدأ بـ 01']; }],
+        ['regGrade', function (v) { return v ? [true] : [false, 'اختر الصف الدراسي']; }],
+        ['regPassword', function (v) { return v.length >= 6 ? [true] : [false, 'كلمة المرور يجب ألا تقل عن ٦ أحرف']; }]
+      ];
+
+      rules.forEach(function (r) {
+        const el = document.getElementById(r[0]);
+        if (!el) return;
+        el.addEventListener('blur', function () {
+          if (!el.value) return;
+          const res = r[1](el.value);
+          setFieldState(el, res[0], res[1]);
+        });
+        el.addEventListener('input', debounce(function () {
+          if (!el.value) return;
+          const res = r[1](el.value);
+          if (res[0]) setFieldState(el, true);
+        }, 420));
+      });
+
+      // الهاتف: أرقام فقط
+      ['regPhone', 'regParentPhone'].forEach(function (id) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.addEventListener('input', function () {
+          el.value = el.value.replace(/[^0-9]/g, '').slice(0, 11);
+        });
+      });
+
+      // checkbox الشروط
+      const cb = document.getElementById('regTerms');
+      if (cb) cb.addEventListener('change', function () {
+        const row = cb.closest('.check-row');
+        if (cb.checked && row) row.classList.remove('is-invalid');
+      });
+    }
+
+    /* ─── تشغيل الصفحة ─── */
+    document.addEventListener('DOMContentLoaded', async function () {
+      if (typeof initProtection === 'function') initProtection();
+
+      // ملء قائمة الصفوف من CONFIG.GRADES
+      const gradeSel = document.getElementById('regGrade');
+      if (gradeSel) {
+        CONFIG.GRADES.forEach(function (g) {
+          const o = document.createElement('option');
+          o.value = g; o.textContent = g;
+          gradeSel.appendChild(o);
+        });
+      }
+
+      bindStrength();
+      bindLiveValidation();
+
+      // حد المحاولات
+      const pre = registerRateLimiter.check();
+      if (!pre.allowed) {
+        const box = document.getElementById('registerRateAlert');
+        box.hidden = false;
+        box.innerHTML = '<i class="fa-solid fa-shield-halved"></i><div><strong>تم إيقاف التسجيل مؤقتًا</strong><br>' +
+          escapeHtml(rateLimitMessage(pre)) + '</div>';
+        const btn = document.getElementById('registerSubmit');
+        if (btn) btn.disabled = true;
+      }
+
+      // لو مسجّل دخول بالفعل
+      try {
+        const { data } = await supabaseClient.auth.getSession();
+        if (data && data.session && data.session.user) {
+          showToast('أنت مسجّل الدخول بالفعل — جارِ التحويل…', 'info', 2000);
+          setTimeout(function () { goTo(CONFIG.PAGES.home); }, 700);
+        }
+      } catch (e) {}
+
+      setTimeout(function () { const n = document.getElementById('regName'); if (n) n.focus(); }, 320);
+
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register(basePath() + 'sw.js', { scope: basePath() }).catch(function () {});
+      }
+    });
+  </script>
+</body>
+</html>

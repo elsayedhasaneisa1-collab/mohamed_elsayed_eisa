@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>منصة الأستاذ محمد عيسى التعليمية | المرحلة الثانوية</title>
+
+  <meta name="description" content="منصة الأستاذ محمد عيسى التعليمية — كورسات المرحلة الثانوية، دروس مسجلة، امتحانات إلكترونية، واجبات، ومتابعة مباشرة. للتواصل: 01555814414" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <meta name="author" content="الأستاذ محمد عيسى" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <link rel="icon" type="image/png" href="assets/icon-192.png" />
+  <link rel="apple-touch-icon" href="assets/icon-192.png" />
+  <link rel="manifest" href="manifest.json" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="page-home">
+
+  <div class="bg-stage" aria-hidden="true">
+    <div class="bg-glow bg-glow--one"></div>
+    <div class="bg-glow bg-glow--two"></div>
+    <div class="bg-grid"></div>
+    <div class="bg-noise"></div>
+    <div class="bg-vignette"></div>
+  </div>
+
+  <!-- ═══════════ شريط التنقل ═══════════ -->
+  <header class="navbar" id="navbar">
+    <div class="navbar__inner">
+
+      <a href="#home" class="brand" data-scroll>
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 48 48" width="34" height="34">
+            <defs>
+              <linearGradient id="bgGold" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#ffe27a" />
+                <stop offset="45%" stop-color="#e6b800" />
+                <stop offset="100%" stop-color="#8a6a00" />
+              </linearGradient>
+            </defs>
+            <path d="M24 2.5 44 13v22L24 45.5 4 35V13z" fill="none" stroke="url(#bgGold)" stroke-width="2.2" />
+            <path d="M15 31V17l9 8 9-8v14" fill="none" stroke="url(#bgGold)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </span>
+        <span class="brand__text">
+          <strong>محمد عيسى</strong>
+          <small>منصة تعليمية</small>
+        </span>
+      </a>
+
+      <nav class="nav-links" id="navLinks" aria-label="التنقل الرئيسي">
+        <a href="#home" data-scroll class="nav-links__a is-active">الرئيسية</a>
+        <a href="#courses" data-scroll class="nav-links__a">الكورسات</a>
+        <a href="#announcements" data-scroll class="nav-links__a">الإعلانات</a>
+        <a href="#tasks" data-scroll class="nav-links__a">الامتحانات</a>
+        <a href="#about" data-scroll class="nav-links__a">عن الأستاذ</a>
+        <a href="#support" data-scroll class="nav-links__a">الدعم الفني</a>
+      </nav>
+
+      <div class="navbar__actions">
+        <div class="auth-guest" id="authGuest">
+          <a href="login.html" class="btn btn--ghost btn--sm"><i class="fa-solid fa-right-to-bracket"></i><span>دخول</span></a>
+          <a href="register.html" class="btn btn--gold btn--sm"><i class="fa-solid fa-user-plus"></i><span>اشترك الآن</span></a>
+        </div>
+
+        <div class="auth-user" id="authUser" hidden>
+          <button type="button" class="btn btn--line btn--sm" id="btnOpenChatTop" title="الشات">
+            <i class="fa-regular fa-comments"></i><span class="hide-sm">الشات</span>
+            <span class="chat-dot" id="chatDot" hidden></span>
+          </button>
+          <a href="admin.html" class="btn btn--gold btn--sm" id="btnAdminPanel" hidden>
+            <i class="fa-solid fa-shield-halved"></i><span class="hide-sm">لوحة التحكم</span>
+          </a>
+          <div class="user-chip" id="userChip">
+            <span class="user-chip__avatar" id="userAvatar">ط</span>
+            <span class="user-chip__meta">
+              <strong id="userName">الطالب</strong>
+              <small id="userGrade">—</small>
+            </span>
+            <button type="button" class="user-chip__out" id="btnLogout" title="تسجيل الخروج">
+              <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            </button>
+          </div>
+        </div>
+
+        <button type="button" class="nav-burger" id="navBurger" aria-label="القائمة" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="navbar__progress"><i id="scrollProgress"></i></div>
+  </header>
+
+  <main id="home">
+
+    <!-- ═══════════ HERO ═══════════ -->
+    <section class="hero">
+      <div class="hero__inner">
+
+        <div class="hero__copy reveal">
+          <span class="eyebrow">
+            <i class="pulse-dot"></i>
+            التسجيل مفتوح الآن — دفعة الثانوية العامة
+          </span>
+
+          <h1 class="hero__title">
+            <span class="hero__title-line hero__title-line--thin">منصة</span>
+            <span class="hero__title-line hero__title-line--heavy">محمد عيسى</span>
+            <span class="hero__title-line hero__title-line--outline">التعليمية</span>
+          </h1>
+
+          <p class="hero__lead">
+            شرح مبسّط لكل صفوف المرحلة الثانوية، دروس مسجّلة بجودة عالية، امتحانات إلكترونية
+            بتوقيت محدد، واجبات أسبوعية، ومتابعة فردية مع الأستاذ عبر الشات المباشر.
+            <strong>مكان واحد… يجمع منهجك كله.</strong>
+          </p>
+
+          <div class="hero__cta">
+            <button type="button" class="btn btn--gold btn--lg" data-scroll data-target="#courses">
+              <i class="fa-solid fa-play"></i> استعرض الكورسات
+            </button>
+            <a class="btn btn--line btn--lg" href="tel:01555814414">
+              <i class="fa-solid fa-phone-volume"></i> 01555814414
+            </a>
+          </div>
+
+          <div class="hero__stats" id="heroStats">
+            <div class="stat">
+              <b data-count id="statCourses">0</b>
+              <span>كورس متاح</span>
+            </div>
+            <i class="stat__sep"></i>
+            <div class="stat">
+              <b data-count id="statLessons">0</b>
+              <span>درس مسجّل</span>
+            </div>
+            <i class="stat__sep"></i>
+            <div class="stat">
+              <b data-count id="statStudents">0</b>
+              <span>طالب مشترك</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero__visual reveal reveal--d2">
+          <div class="orbit" aria-hidden="true">
+            <span class="orbit__ring orbit__ring--1"></span>
+            <span class="orbit__ring orbit__ring--2"></span>
+            <span class="orbit__spark"></span>
+          </div>
+
+          <div class="peek-card peek-card--player">
+            <div class="peek-card__head">
+              <span class="dots"><i></i><i></i><i></i></span>
+              <span class="peek-card__tag"><i class="fa-solid fa-signal"></i> درس مسجّل</span>
+            </div>
+            <div class="peek-card__screen">
+              <button type="button" class="big-play" id="heroPlayBtn" aria-label="تشغيل درس تجريبي">
+                <i class="fa-solid fa-play"></i>
+              </button>
+              <div class="peek-card__bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+              <span class="peek-card__wm">محمّد عيسى · منصة تعليمية</span>
+            </div>
+            <div class="peek-card__foot">
+              <span><i class="fa-regular fa-clock"></i> ٤٥ دقيقة</span>
+              <span><i class="fa-solid fa-shield-halved"></i> مشاهدة محمية</span>
+            </div>
+          </div>
+
+          <aside class="peek-card peek-card--float" id="heroAnnouncement">
+            <span class="peek-card__icon"><i class="fa-solid fa-bullhorn"></i></span>
+            <div>
+              <strong id="heroAnnouncementTitle">أحدث إعلان</strong>
+              <p id="heroAnnouncementBody">جارِ تحميل آخر أخبار المنصة…</p>
+            </div>
+          </aside>
+
+          <div class="peek-badge">
+            <b>4.9</b>
+            <span><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+            <small>تقييم الطلاب</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee__track">
+          <span>شرح مبسّط</span><i>◆</i><span>امتحانات إلكترونية</span><i>◆</i><span>متابعة دورية</span><i>◆</i>
+          <span>واجبات أسبوعية</span><i>◆</i><span>دعم فني سريع</span><i>◆</i><span>جلسة واحدة لكل طالب</span><i>◆</i>
+          <span>شرح مبسّط</span><i>◆</i><span>امتحانات إلكترونية</span><i>◆</i><span>متابعة دورية</span><i>◆</i>
+          <span>واجبات أسبوعية</span><i>◆</i><span>دعم فني سريع</span><i>◆</i><span>جلسة واحدة لكل طالب</span><i>◆</i>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ مميزات سريعة ═══════════ -->
+    <section class="strip" id="features">
+      <div class="container">
+        <div class="strip__grid">
+          <article class="strip__item reveal">
+            <span class="strip__num">01</span>
+            <h3>منهج مُرتّب</h3>
+            <p>دروس مرتّبة بالترتيب داخل كل كورس، تعرف دائمًا فين وصلت وإيه اللي فاضل.</p>
+          </article>
+          <article class="strip__item reveal reveal--d1">
+            <span class="strip__num">02</span>
+            <h3>امتحانات بتوقيت</h3>
+            <p>كل امتحان له موعد انتهاء محدد، وبيصحّح تلقائيًا وتظهر النتيجة فورًا.</p>
+          </article>
+          <article class="strip__item reveal reveal--d2">
+            <span class="strip__num">03</span>
+            <h3>متابعة فردية</h3>
+            <p>شات مباشر مع الأستاذ، وسجلّ كامل لاشتراكاتك وواجباتك في صفحة واحدة.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ قسم الكورسات ═══════════ -->
+    <section class="section" id="courses">
+      <div class="container">
+
+        <div class="section-head reveal">
+          <span class="section-head__kicker"><i class="fa-solid fa-graduation-cap"></i> المحتوى</span>
+          <h2 class="section-head__title">الكورسات <em>المتاحة</em></h2>
+          <p class="section-head__sub">اختر صفّك الدراسي، ثم اشترك في الكورس — الاشتراك بيتفعّل بعد موافقة الأستاذ.</p>
+        </div>
+
+        <div class="tabs" role="tablist" aria-label="أقسام الكورسات">
+          <button type="button" role="tab" class="tabs__btn is-active" data-tab="allCourses" onclick="switchTab('allCourses', this)">
+            <i class="fa-solid fa-layer-group"></i> كل الكورسات
+          </button>
+          <button type="button" role="tab" class="tabs__btn" data-tab="myCourses" onclick="switchTab('myCourses', this)">
+            <i class="fa-solid fa-book-bookmark"></i> كورساتي
+            <span class="tabs__count" id="myCoursesCount" hidden>0</span>
+          </button>
+          <button type="button" role="tab" class="tabs__btn" data-tab="profile" onclick="switchTab('profile', this)">
+            <i class="fa-regular fa-id-card"></i> الملف الشخصي
+          </button>
+        </div>
+
+        <div class="chips" id="gradeChips" role="group" aria-label="تصفية حسب الصف">
+          <button type="button" class="chip is-active" data-grade="all" onclick="filterByGrade('all', this)">الكل</button>
+        </div>
+
+        <div class="tab-panel is-active" id="panel-allCourses">
+          <div class="courses-grid" id="coursesGrid"></div>
+          <div class="empty-state" id="coursesEmpty" hidden>
+            <i class="fa-regular fa-folder-open"></i>
+            <h4>لا توجد كورسات بهذا التصنيف حاليًا</h4>
+            <p>تابع قسم الإعلانات لمعرفة مواعيد نزول الكورسات الجديدة.</p>
+          </div>
+          <div class="loader" id="coursesLoader"><span></span><span></span><span></span></div>
+        </div>
+
+        <div class="tab-panel" id="panel-myCourses">
+          <div class="courses-grid" id="myCoursesGrid"></div>
+          <div class="empty-state" id="myCoursesEmpty" hidden>
+            <i class="fa-regular fa-circle-question"></i>
+            <h4>لم تشترك في أي كورس بعد</h4>
+            <p>سجّل الدخول ثم اضغط «اشترك الآن» على أي كورس، وسيُفعّل بعد موافقة الأستاذ.</p>
+            <button type="button" class="btn btn--gold btn--sm" onclick="switchTab('allCourses')">تصفّح الكورسات</button>
+          </div>
+          <div class="loader" id="myCoursesLoader" hidden><span></span><span></span><span></span></div>
+        </div>
+
+        <div class="tab-panel" id="panel-profile">
+          <div class="profile-card" id="profileCard">
+            <div class="loader"><span></span><span></span><span></span></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══════════ الإعلانات ═══════════ -->
+    <section class="section section--tinted" id="announcements">
+      <div class="container">
+        <div class="section-head section-head--row reveal">
+          <div>
+            <span class="section-head__kicker"><i class="fa-solid fa-bullhorn"></i> جديد المنصة</span>
+            <h2 class="section-head__title">لوحة <em>الإعلانات</em></h2>
+          </div>
+          <p class="section-head__sub">مواعيد المحاضرات، تغييرات الجدول، وفتح باب الاشتراك.</p>
+        </div>
+        <div class="ann-grid" id="announcementsGrid"></div>
+        <div class="empty-state empty-state--sm" id="announcementsEmpty" hidden>
+          <i class="fa-regular fa-newspaper"></i>
+          <h4>لا توجد إعلانات منشورة</h4>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ الامتحانات والواجبات ═══════════ -->
+    <section class="section" id="tasks">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-head__kicker"><i class="fa-solid fa-clipboard-check"></i> التقييم</span>
+          <h2 class="section-head__title">الامتحانات <em>والواجبات</em></h2>
+          <p class="section-head__sub">تظهر هنا الامتحانات والواجبات الخاصة بالكورسات المشترك فيها.</p>
+        </div>
+
+        <div class="tasks-grid">
+          <div class="tasks-col reveal">
+            <h3 class="tasks-col__title"><i class="fa-solid fa-file-signature"></i> امتحانات متاحة</h3>
+            <div class="task-list" id="examsList"></div>
+          </div>
+          <div class="tasks-col reveal reveal--d1">
+            <h3 class="tasks-col__title"><i class="fa-solid fa-pen-to-square"></i> واجبات مطلوبة</h3>
+            <div class="task-list" id="homeworksList"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ عن الأستاذ ═══════════ -->
+    <section class="section section--tinted" id="about">
+      <div class="container">
+        <div class="about">
+
+          <div class="about__portrait reveal">
+            <div class="portrait">
+              <div class="portrait__frame">
+                <span class="portrait__mono">م‌ع</span>
+                <svg class="portrait__deco" viewBox="0 0 200 200" aria-hidden="true">
+                  <circle cx="100" cy="100" r="92" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="4 10" />
+                  <circle cx="100" cy="100" r="78" fill="none" stroke="currentColor" stroke-width=".6" opacity=".5" />
+                </svg>
+              </div>
+              <div class="portrait__glow" aria-hidden="true"></div>
+            </div>
+
+            <div class="about__contact-cards">
+              <a class="contact-card" href="tel:01555814414">
+                <span><i class="fa-solid fa-phone"></i></span>
+                <div><strong>اتصال مباشر</strong><small dir="ltr">01555814414</small></div>
+                <i class="fa-solid fa-arrow-left contact-card__go"></i>
+              </a>
+              <a class="contact-card" href="https://wa.me/201555814414" target="_blank" rel="noopener noreferrer">
+                <span><i class="fa-brands fa-whatsapp"></i></span>
+                <div><strong>واتساب</strong><small>رد سريع يوميًا</small></div>
+                <i class="fa-solid fa-arrow-left contact-card__go"></i>
+              </a>
+              <a class="contact-card" href="https://t.me/sayoda_elgadar" target="_blank" rel="noopener noreferrer">
+                <span><i class="fa-brands fa-telegram"></i></span>
+                <div><strong>تيليجرام</strong><small dir="ltr">@sayoda_elgadar</small></div>
+                <i class="fa-solid fa-arrow-left contact-card__go"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="about__body reveal reveal--d1">
+            <span class="section-head__kicker"><i class="fa-solid fa-chalkboard-user"></i> المدرّس</span>
+            <h2 class="section-head__title">عن الأستاذ <em>محمد عيسى</em></h2>
+
+            <p class="about__text">
+              معلّم مادة الرياضيات والفيزياء للمرحلة الثانوية، بخبرة تمتد لسنوات في شرح المناهج
+              بأسلوب مبسّط يعتمد على الفهم لا الحفظ. بنيتُ هذه المنصة لتكون بديلًا حقيقيًا عن
+              السنتر: مكان واحد تجد فيه الدرس، والملخص، والامتحان، والمتابعة.
+            </p>
+            <p class="about__text">
+              كل طالب له ملفّ خاص يتابع من خلاله تقدّمه، وأستقبل أسئلته بنفسي عبر الشات الداخلي
+              في المنصة وأرد عليها في مواعيد محددة يوميًا.
+            </p>
+
+            <ul class="about__list">
+              <li><i class="fa-solid fa-circle-check"></i> شرح المنهج كاملًا بدون حشو أو تكرار.</li>
+              <li><i class="fa-solid fa-circle-check"></i> بنك أسئلة وامتحانات بنظام الثانوية الجديد.</li>
+              <li><i class="fa-solid fa-circle-check"></i> متابعة أسبوعية وتقارير مستوى.</li>
+              <li><i class="fa-solid fa-circle-check"></i> حلّ الواجبات ومراجعة الإجابات خطوة بخطوة.</li>
+              <li><i class="fa-solid fa-circle-check"></i> بثّ مباشر ومراجعات نهائية قبل الامتحانات.</li>
+              <li><i class="fa-solid fa-circle-check"></i> مجموعة تيليجرام لكل صف دراسي.</li>
+            </ul>
+
+            <div class="about__cta">
+              <a href="tel:01555814414" class="btn btn--gold"><i class="fa-solid fa-headset"></i> كلّم الأستاذ: 01555814414</a>
+              <button type="button" class="btn btn--line" id="btnOpenChatAbout"><i class="fa-regular fa-comments"></i> ابدأ محادثة</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ الدعم الفني / الفوتر ═══════════ -->
+    <section class="section support" id="support">
+      <div class="container">
+        <div class="support__card reveal">
+          <div>
+            <span class="section-head__kicker"><i class="fa-solid fa-life-ring"></i> مساعدة</span>
+            <h2 class="section-head__title">الدعم <em>الفني</em></h2>
+            <p class="section-head__sub">
+              عندك مشكلة في التسجيل أو تشغيل الدرس أو تفعيل الاشتراك؟
+              فريق الدعم متاح على تيليجرام ويرد في أسرع وقت.
+            </p>
+            <div class="support__actions">
+              <a class="btn btn--gold btn--lg" href="https://t.me/sayoda_elgadar" target="_blank" rel="noopener noreferrer">
+                <i class="fa-brands fa-telegram"></i> الدعم على تيليجرام
+              </a>
+              <button type="button" class="btn btn--line btn--lg" id="btnOpenChatSupport">
+                <i class="fa-regular fa-comment-dots"></i> شات المنصة
+              </button>
+            </div>
+          </div>
+          <div class="support__meta">
+            <div><small>الهاتف</small><strong dir="ltr">01555814414</strong></div>
+            <div><small>تيليجرام</small><strong dir="ltr">t.me/sayoda_elgadar</strong></div>
+            <div><small>مواعيد الرد</small><strong>يوميًا ٤م — ١١م</strong></div>
+          </div>
+        </div>
+
+        <footer class="footer">
+          <div class="footer__top">
+            <div class="footer__brand">
+              <a href="#home" data-scroll class="brand">
+                <span class="brand__mark" aria-hidden="true">
+                  <svg viewBox="0 0 48 48" width="30" height="30">
+                    <path d="M24 2.5 44 13v22L24 45.5 4 35V13z" fill="none" stroke="#e6b800" stroke-width="2.2" />
+                    <path d="M15 31V17l9 8 9-8v14" fill="none" stroke="#e6b800" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </span>
+                <span class="brand__text"><strong>محمد عيسى</strong><small>منصة تعليمية</small></span>
+              </a>
+              <p>منصة تعليمية عربية متكاملة لطلاب المرحلة الثانوية — شرح، امتحانات، ومتابعة.</p>
+            </div>
+
+            <nav class="footer__nav" aria-label="روابط سريعة">
+              <h5>روابط</h5>
+              <a href="#courses" data-scroll>الكورسات</a>
+              <a href="#announcements" data-scroll>الإعلانات</a>
+              <a href="#about" data-scroll>عن الأستاذ</a>
+              <a href="register.html">إنشاء حساب</a>
+            </nav>
+
+            <nav class="footer__nav" aria-label="صفحات">
+              <h5>حسابي</h5>
+              <a href="login.html">تسجيل الدخول</a>
+              <a href="#" onclick="switchTab('myCourses');return false;">كورساتي</a>
+              <a href="#" onclick="switchTab('profile');return false;">الملف الشخصي</a>
+              <a href="https://t.me/sayoda_elgadar" target="_blank" rel="noopener noreferrer">الدعم الفني</a>
+            </nav>
+
+            <div class="footer__nav">
+              <h5>تواصل</h5>
+              <a href="tel:01555814414" dir="ltr"><i class="fa-solid fa-phone"></i> 01555814414</a>
+              <a href="https://wa.me/201555814414" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> واتساب</a>
+              <a href="https://t.me/sayoda_elgadar" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-telegram"></i> تيليجرام</a>
+            </div>
+          </div>
+
+          <div class="footer__bottom">
+            <span>© <span id="yearNow">2026</span> منصة الأستاذ محمد عيسى التعليمية — جميع الحقوق محفوظة.</span>
+            <span class="footer__made"><i class="fa-solid fa-lock"></i> محمي بنظام الجلسة الواحدة + علامة مائية</span>
+          </div>
+        </footer>
+      </div>
+    </section>
+  </main>
+
+  <!-- ═══════════ Bottom Bar ═══════════ -->
+  <nav class="bottom-bar" id="bottomBar" aria-label="التنقل السفلي">
+    <button type="button" class="bottom-bar__btn is-active" onclick="bottomNav('courses', this)" aria-label="كورسات">
+      <i class="fa-solid fa-layer-group"></i><span>كورسات</span>
+    </button>
+    <button type="button" class="bottom-bar__btn" onclick="bottomNav('myCourses', this)" aria-label="كورساتي">
+      <i class="fa-solid fa-book-bookmark"></i><span>كورساتي</span>
+      <i class="bottom-bar__badge" id="bbMyCourses" hidden></i>
+    </button>
+    <button type="button" class="bottom-bar__btn bottom-bar__btn--chat" onclick="bottomNav('chat', this)" aria-label="شات">
+      <span class="bottom-bar__fab"><i class="fa-regular fa-comments"></i></span>
+      <span>شات</span>
+      <i class="bottom-bar__badge" id="bbChat" hidden></i>
+    </button>
+    <button type="button" class="bottom-bar__btn" onclick="bottomNav('about', this)" aria-label="عن المدرس">
+      <i class="fa-solid fa-chalkboard-user"></i><span>عن المدرس</span>
+    </button>
+    <a class="bottom-bar__btn" href="https://t.me/sayoda_elgadar" target="_blank" rel="noopener noreferrer" aria-label="دعم فني">
+      <i class="fa-brands fa-telegram"></i><span>دعم فني</span>
+    </a>
+  </nav>
+
+  <a class="tg-float" href="https://t.me/sayoda_elgadar" target="_blank" rel="noopener noreferrer" aria-label="تواصل عبر تيليجرام">
+    <i class="fa-brands fa-telegram"></i>
+    <span class="tg-float__ring" aria-hidden="true"></span>
+  </a>
+
+  <!-- ═══════════ Modal: مشغل الفيديو ═══════════ -->
+  <div class="modal" id="playerModal" role="dialog" aria-modal="true" aria-labelledby="playerModalTitle" hidden>
+    <div class="modal__backdrop" data-close-modal="playerModal"></div>
+    <div class="modal__box modal__box--player">
+      <header class="modal__head">
+        <div>
+          <span class="modal__kicker" id="playerCourseName">الكورس</span>
+          <h3 id="playerModalTitle">عنوان الدرس</h3>
+        </div>
+        <button type="button" class="modal__x" data-close-modal="playerModal" aria-label="إغلاق"><i class="fa-solid fa-xmark"></i></button>
+      </header>
+      <div class="player-stage" id="playerStage">
+        <div class="player-frame" id="playerFrame"></div>
+        <div class="wm-layer" id="wmLayer" aria-hidden="true">
+          <span class="wm-layer__text" id="wmText">—</span>
+        </div>
+        <div class="player-guard" id="playerGuard" hidden>
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <h4>تم إيقاف العرض</h4>
+          <p>تم اكتشاف أدوات مطور أو محاولة تسجيل للشاشة. أغلق الأدوات ثم اضغط «استئناف».</p>
+          <button type="button" class="btn btn--gold btn--sm" onclick="resumePlayer()"><i class="fa-solid fa-rotate-right"></i> استئناف</button>
+        </div>
+      </div>
+      <footer class="modal__foot modal__foot--split">
+        <div class="player-nav">
+          <button type="button" class="btn btn--line btn--sm" id="btnPrevLesson" onclick="prevLesson()"><i class="fa-solid fa-backward"></i> السابق</button>
+          <span class="player-nav__idx" id="playerLessonIndex">— / —</span>
+          <button type="button" class="btn btn--line btn--sm" id="btnNextLesson" onclick="nextLesson()">التالي <i class="fa-solid fa-forward"></i></button>
+        </div>
+        <div class="player-tools">
+          <button type="button" class="btn btn--ghost btn--sm" id="btnMarkDone" onclick="toggleLessonDone()"><i class="fa-regular fa-circle-check"></i> <span>تمّت المشاهدة</span></button>
+          <a class="btn btn--ghost btn--sm" href="https://t.me/sayoda_elgadar" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-telegram"></i> استفسار</a>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <!-- ═══════════ Modal: دروس الكورس ═══════════ -->
+  <div class="modal" id="lessonsModal" role="dialog" aria-modal="true" aria-labelledby="lessonsModalTitle" hidden>
+    <div class="modal__backdrop" data-close-modal="lessonsModal"></div>
+    <div class="modal__box modal__box--tall">
+      <header class="modal__head">
+        <div>
+          <span class="modal__kicker" id="lessonsCourseGrade">الصف</span>
+          <h3 id="lessonsModalTitle">دروس الكورس</h3>
+        </div>
+        <button type="button" class="modal__x" data-close-modal="lessonsModal" aria-label="إغلاق"><i class="fa-solid fa-xmark"></i></button>
+      </header>
+      <div class="modal__body" id="lessonsList">
+        <div class="loader"><span></span><span></span><span></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ Modal: الشات ═══════════ -->
+  <div class="modal" id="chatModal" role="dialog" aria-modal="true" aria-labelledby="chatModalTitle" hidden>
+    <div class="modal__backdrop" data-close-modal="chatModal"></div>
+    <div class="modal__box modal__box--chat">
+      <header class="modal__head modal__head--chat">
+        <div class="chat-head__user">
+          <span class="chat-head__avatar"><i class="fa-solid fa-headset"></i></span>
+          <div>
+            <h3 id="chatModalTitle">الشات مع الأستاذ</h3>
+            <small id="chatStatusText"><i class="pulse-dot pulse-dot--gold"></i> متصل — يُرد عادة خلال ساعات</small>
+          </div>
+        </div>
+        <div class="chat-head__tools">
+          <button type="button" class="btn btn--line btn--sm" id="btnChatThreads" onclick="toggleChatThreads()" hidden>
+            <i class="fa-solid fa-list-ul"></i> المحادثات
+          </button>
+          <button type="button" class="modal__x" data-close-modal="chatModal" aria-label="إغلاق"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+      </header>
+
+      <aside class="chat-threads" id="chatThreads" hidden>
+        <div class="chat-threads__search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="search" id="chatThreadsSearch" placeholder="ابحث باسم الطالب أو هاتفه…" oninput="filterChatThreads(this.value)" />
+        </div>
+        <div class="chat-threads__list" id="chatThreadsList"></div>
+      </aside>
+
+      <div class="chat-body">
+        <div class="chat-stream" id="chatStream" aria-live="polite"></div>
+        <div class="chat-empty" id="chatEmpty">
+          <i class="fa-regular fa-comment-dots"></i>
+          <h4>ابدأ المحادثة</h4>
+          <p>اكتب سؤالك عن الدرس أو الاشتراك وسيصل مباشرة للأستاذ محمد عيسى.</p>
+        </div>
+      </div>
+
+      <form class="chat-composer" id="chatForm" onsubmit="sendChatMessage(event)">
+        <button type="button" class="chat-composer__emoji" onclick="insertQuickText('السلام عليكم، ')" title="تحية">
+          <i class="fa-regular fa-hand"></i>
+        </button>
+        <input type="text" id="chatInput" maxlength="800" autocomplete="off"
+               placeholder="اكتب رسالتك هنا…" aria-label="نص الرسالة" />
+        <button type="submit" class="chat-composer__send" id="chatSendBtn" aria-label="إرسال">
+          <i class="fa-solid fa-paper-plane"></i>
+        </button>
+      </form>
+      <p class="chat-hint" id="chatHint">يمكنك إرسال ٥ رسائل كل ١٠ ثوانٍ.</p>
+    </div>
+  </div>
+
+  <!-- ═══════════ Modal: تم تسجيل خروجك ═══════════ -->
+  <div class="modal modal--alert" id="kickedModal" role="alertdialog" aria-modal="true" aria-labelledby="kickedTitle" hidden>
+    <div class="modal__backdrop modal__backdrop--solid"></div>
+    <div class="modal__box modal__box--sm">
+      <div class="alert-icon"><i class="fa-solid fa-user-shield"></i></div>
+      <h3 id="kickedTitle">تم تسجيل خروجك</h3>
+      <p id="kickedBody">تم فتح حسابك من جهاز آخر، ولذلك أُنهيت هذه الجلسة لحماية حسابك.</p>
+      <div class="modal__foot modal__foot--center">
+        <a href="login.html" class="btn btn--gold"><i class="fa-solid fa-right-to-bracket"></i> تسجيل الدخول مرة أخرى</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ Modal: تفاصيل / تأكيد عام ═══════════ -->
+  <div class="modal" id="infoModal" role="dialog" aria-modal="true" aria-labelledby="infoModalTitle" hidden>
+    <div class="modal__backdrop" data-close-modal="infoModal"></div>
+    <div class="modal__box modal__box--sm">
+      <header class="modal__head">
+        <h3 id="infoModalTitle">تنبيه</h3>
+        <button type="button" class="modal__x" data-close-modal="infoModal" aria-label="إغلاق"><i class="fa-solid fa-xmark"></i></button>
+      </header>
+      <div class="modal__body" id="infoModalBody"></div>
+      <div class="modal__foot modal__foot--center">
+        <button type="button" class="btn btn--line btn--sm" data-close-modal="infoModal">إغلاق</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-stack" id="toastStack" aria-live="polite" aria-atomic="false"></div>
+
+  <!-- ═══════════ المكتبات والسكربتات ═══════════ -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/session.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/courses.js"></script>
+  <script src="js/player.js"></script>
+  <script src="js/chat.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
